@@ -7,6 +7,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -22,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'room_id',
     ];
 
     /**
@@ -44,13 +48,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    /**
-     * Get the type that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function type(): BelongsTo
+    public function room(): BelongsTo
     {
-        return $this->belongsTo(Type::class, 'room_id', 'id');
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 }

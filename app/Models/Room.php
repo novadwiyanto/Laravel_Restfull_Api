@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Room extends Model
 {
@@ -15,25 +16,13 @@ class Room extends Model
 
     protected $table = 'rooms';
 
-    /**
-     * Get the type that owns the room
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(Type::class, 'room_id', 'id');
-    }
-
-    /**
-     * Get all of the user for the room
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function user(): HasMany
+    public function User(): HasMany
     {
         return $this->hasMany(User::class, 'room_id', 'id');
     }
 
-    
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(Type::class, 'type_id', 'id');
+    }
 }
