@@ -1,7 +1,9 @@
 ## Running the Project
 
+* Setup .env
 * `php artisan migrate`
 * `php artisan db:seed`
+* `php artisan serve`
 
 
 ## Guide to Build
